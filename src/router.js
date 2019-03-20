@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Giiker from './views/Giiker.vue';
 import Collect from './views/Collect.vue';
+import Socket from './views/Socket.vue';
 
 Vue.use(Router);
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/giiker',
       name: 'giiker',
       component: Giiker,
+    },
+    {
+      path: '/socket',
+      name: 'socket',
+      component: Socket,
     },
     {
       path: '/collect',
