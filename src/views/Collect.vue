@@ -63,11 +63,14 @@ export default {
     },
     normalize() {
       const offset = this.data[0];
-      for (let index = 0; index < this.data.length; index += 1) {
+      for (let index = 1; index < this.data.length; index += 1) {
         this.data[index] -= offset;
       }
+      const timestamp = this.data[0];
+      this.data[0] = 0;
       this.data.unshift(this.cube.device.name);
       this.data.unshift(this.user);
+      this.data.unshift(timestamp);
     },
     download() {
       const rows = this.datas;
