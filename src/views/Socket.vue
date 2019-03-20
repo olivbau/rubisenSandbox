@@ -19,7 +19,7 @@ export default {
     };
   },
   mounted() {
-    this.socket = io('localhost:3000', { secure: true });
+    this.socket = io('http://localhost:3000');
   },
   methods: {
     connect() {
