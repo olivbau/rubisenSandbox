@@ -2,16 +2,19 @@
   "name": "rubisen",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/olivbau/rubisen",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest docs",
-    "lint": "vue-cli-service lint"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "dependencies": {
     "lodash": "^4.17.11",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "vue": "^2.6.6",
+    "vue-gh-pages": "^1.19.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

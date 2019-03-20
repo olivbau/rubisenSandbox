@@ -2,6 +2,7 @@
   <div class="giiker">
     <button @click="connect">Connect</button>
     <button @click="download">Download</button>
+    <input type="text" v-model="user">
     <p>Entries: {{entries}}</p>
     <p>Reset: R R'</p>
     <h1>Sequence: {{sequenceStr}}</h1>
@@ -20,8 +21,9 @@ export default {
   data() {
     return {
       cube: new GiikerCube(),
+      user: 'user',
       lastMove: null,
-      sequence: ['U', 'U', 'R', 'R'],
+      sequence: ['L\'', 'U', 'R', 'U\'', 'L', 'U', 'R\'', 'U\''],
       currentSequence: [],
       data: [],
       datas: [],
@@ -64,6 +66,10 @@ export default {
       for (let index = 0; index < this.data.length; index += 1) {
         this.data[index] -= offset;
       }
+      for (let index = 1; index < this.data.length; index += 1) {
+        this.data[index] -= this.data[index - 1];
+      }
+      this.data.unshift(this.user);
     },
     download() {
       const rows = this.datas;
