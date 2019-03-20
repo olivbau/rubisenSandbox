@@ -66,7 +66,7 @@ export default {
       for (let index = 0; index < this.data.length; index += 1) {
         this.data[index] -= offset;
       }
-      for (let index = 1; index < this.data.length; index += 1) {
+      for (let index = this.data.length - 1; index > 0; index -= 1) {
         this.data[index] -= this.data[index - 1];
       }
       this.data.unshift(this.user);
