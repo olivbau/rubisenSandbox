@@ -4,7 +4,7 @@
     <h1>Sequence: {{sequenceStr}}</h1>
     <h1>{{currentSequenceStr}}</h1>
 
-    <p>{{loginData}}</p>
+    <p>{{data}}</p>
     <h1>{{predictedUser}}</h1>
   </div>
 </template>
@@ -25,7 +25,6 @@ export default {
       currentSequence: [],
       socket: null,
       data: [],
-      loginData: [],
       predictedUser: '',
     };
   },
@@ -65,12 +64,11 @@ export default {
     },
     valid() {
       this.normalize();
-      this.loginData = this.data;
       this.sendLogin();
       this.reset();
     },
     sendLogin() {
-      this.socket.emit('login', this.loginData);
+      this.socket.emit('login', this.data);
     },
     normalize() {
       const offset = this.data[0];
