@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/giiker">Giiker</router-link> |
       <router-link to="/socket">Socket</router-link> |
+      <router-link to="/login">Login</router-link> |
       <router-link to="/collect">Collect</router-link> |
       <router-link to="/about">About</router-link>
     </div>

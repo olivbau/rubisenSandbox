@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Giiker from './views/Giiker.vue';
 import Collect from './views/Collect.vue';
 import Socket from './views/Socket.vue';
+import Login from './views/Login.vue';
 
 Vue.use(Router);
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/giiker',
       name: 'giiker',
       component: Giiker,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
     },
     {
       path: '/socket',
