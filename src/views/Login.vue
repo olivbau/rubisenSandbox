@@ -4,7 +4,7 @@
     <h1>Sequence: {{sequenceStr}}</h1>
     <h1>{{currentSequenceStr}}</h1>
 
-    <p>{{data}}</p>
+    <p>{{sendedData}}</p>
     <h1>{{predictedUser}}</h1>
   </div>
 </template>
@@ -26,12 +26,12 @@ export default {
       socket: null,
       data: [],
       predictedUser: '',
+      sendedData: '',
     };
   },
   mounted() {
     this.socket = io('http://127.0.0.1:3001');
     this.socket.on('loginReply', (data) => {
-      console.log('Prediction !!');
       console.log(data);
       this.predictedUser = data;
     });
@@ -64,6 +64,7 @@ export default {
     },
     valid() {
       this.normalize();
+      this.sendedData = this.data;
       this.sendLogin();
       this.reset();
     },
@@ -72,10 +73,10 @@ export default {
     },
     normalize() {
       const offset = this.data[0];
-      for (let index = 1; index < this.data.length; index += 1) {
+      for (let index = 0; index < this.data.length; index += 1) {
         this.data[index] -= offset;
       }
-      for (let index = this.data.length - 1; index === 1; index -= 1) {
+      for (let index = this.data.length - 1; index > 0; index -= 1) {
         this.data[index] -= this.data[index - 1];
       }
       this.data.shift();
