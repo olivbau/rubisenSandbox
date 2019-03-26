@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
 import GiikerCube from '../../lib/giiker';
 
 const _ = require('lodash');
@@ -28,7 +29,11 @@ export default {
       currentSequence: [],
       data: [],
       datas: [],
+      socket: null,
     };
+  },
+  mounted() {
+    this.socket = io('http://127.0.0.1:3001');
   },
   methods: {
     connect() {
@@ -62,8 +67,12 @@ export default {
     },
     valid() {
       this.normalize();
+      this.sendData();
       this.datas.push(this.data);
       this.reset();
+    },
+    sendData() {
+      this.socket.emit('collect', this.data);
     },
     normalize() {
       const offset = this.data[0];
@@ -72,6 +81,9 @@ export default {
       }
       const timestamp = this.data[0];
       this.data[0] = 0;
+      for (let index = this.data.length - 1; index > 0; index -= 1) {
+        this.data[index] -= this.data[index - 1];
+      }
       this.data.unshift(this.cube.device.name);
       this.data.unshift(this.user);
       this.data.unshift(timestamp);

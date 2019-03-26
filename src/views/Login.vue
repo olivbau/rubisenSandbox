@@ -1,11 +1,16 @@
 <template>
   <div class="login">
     <button @click="connect">Cube Connect</button>
+    <input type="text" v-model="url">
+    <input type="text" v-model="port">
+    <button @click="createSocket">Connect Socket</button>
     <h1>Sequence: {{sequenceStr}}</h1>
     <h1>{{currentSequenceStr}}</h1>
 
     <p>{{sendedData}}</p>
-    <h1>{{predictedUser}}</h1>
+    <ul v-for="prediction in predictions" :key="prediction.user">
+      <li>{{prediction.user}} - {{prediction.score}}</li>
+    </ul>
   </div>
 </template>
 
@@ -25,18 +30,32 @@ export default {
       currentSequence: [],
       socket: null,
       data: [],
-      predictedUser: '',
+      predictions: [],
       sendedData: '',
+      url: 'http://127.0.0.1',
+      port: '3001',
     };
   },
   mounted() {
-    this.socket = io('http://127.0.0.1:3001');
+    this.socket = io(`${this.url}:${this.port}`);
     this.socket.on('loginReply', (data) => {
       console.log(data);
-      this.predictedUser = data;
+      this.predictions = _.orderBy(data, ['score'], ['desc']);
     });
   },
   methods: {
+    createSocket() {
+      try {
+        this.socket.close();
+      } catch (error) {
+        console.log(error);
+      }
+      this.socket = io(`${this.url}:${this.port}`);
+      this.socket.on('loginReply', (data) => {
+        console.log(data);
+        this.predictions = _.orderBy(data, ['score'], ['desc']);
+      });
+    },
     connect() {
       this.cube.connect();
       this.cube.addEventListener(this.updateMove);
@@ -96,3 +115,8 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+ul { display:table; margin:0 auto;}
+</style>
