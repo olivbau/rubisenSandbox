@@ -37,11 +37,6 @@ export default {
     };
   },
   mounted() {
-    this.socket = io(`${this.url}:${this.port}`);
-    this.socket.on('loginReply', (data) => {
-      console.log(data);
-      this.predictions = _.orderBy(data, ['score'], ['desc']);
-    });
   },
   methods: {
     createSocket() {
@@ -50,7 +45,7 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      this.socket = io(`${this.url}:${this.port}`);
+      this.socket = io(this.url);
       this.socket.on('loginReply', (data) => {
         console.log(data);
         this.predictions = _.orderBy(data, ['score'], ['desc']);
