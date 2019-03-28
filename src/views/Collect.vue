@@ -33,7 +33,7 @@ export default {
     };
   },
   mounted() {
-    this.socket = io('http://127.0.0.1:3001');
+    this.socket = io('https://rubisen-python.herokuapp.com');
   },
   methods: {
     connect() {

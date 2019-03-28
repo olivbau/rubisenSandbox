@@ -2,7 +2,6 @@
   <div class="login">
     <button @click="connect">Cube Connect</button>
     <input type="text" v-model="url">
-    <input type="text" v-model="port">
     <button @click="createSocket">Connect Socket</button>
     <h1>Sequence: {{sequenceStr}}</h1>
     <h1>{{currentSequenceStr}}</h1>
