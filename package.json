@@ -1,8 +1,8 @@
 {
-  "name": "rubisen",
+  "name": "rubisenSandbox",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/olivbau/rubisen",
+  "homepage": "https://github.com/olivbau/rubisenSandbox",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
